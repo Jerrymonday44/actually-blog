@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 dotenv.config(); // Load environment variables
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 2754;
 
 // Database connection using environment variables
 const { Pool } = pkg;
