@@ -1,0 +1,51 @@
+<%- include("partials/header") %>
+
+<main>
+    <form class="contact-us-form" action="/send-email" method="post">
+        <h2>Contact Us</h2>
+    
+        <label for="first-name">First Name</label>
+        <input id="first-name" type="text" placeholder="First Name" name="firstname" required>
+    
+        <label for="last-name">Last Name</label>
+        <input id="last-name" type="text" placeholder="Last Name" name="lastname" required>
+    
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="Enter your email" name="email" required>
+    
+        <label for="phone-number">Phone</label>
+        <input id="phonenumber" type="text" placeholder="Enter your phone number" name="phone" required>
+    
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Write your message here..." rows="5" required></textarea>
+    
+        <button type="submit">Send Message</button>
+    </form> 
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerMenu = document.querySelector('.hamburger-menu');
+  const dropdownMenu = document.querySelector('.nav-links');
+
+  if (!hamburgerMenu || !dropdownMenu) {
+    console.warn("Dropdown elements not found on this page.");
+    return;
+  }
+
+  hamburgerMenu.addEventListener('click', (event) => {
+    event.stopPropagation();
+    dropdownMenu.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!dropdownMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+});
+
+document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
+
+<%- include("partials/footer") %>

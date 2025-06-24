@@ -1,0 +1,67 @@
+<%- include("partials/header") %>
+
+<main class="news-route-main">
+  <div>
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+  </div>
+  <% if (blog) { %>
+  <div class="news-route-container">
+
+    <!-- Blog Summary -->
+    <h2 class="news-h2"><%= blog.summary %></h2>
+
+    <!-- Render Media (Images and Videos) -->
+    <div class="blog-media">
+      <% blog.image.forEach(file => { %>
+        <% if (file.type.startsWith("image/")) { %>
+        <!-- Render image -->
+        <img class="blog-image" src="<%= file.path %>" alt="Blog Image" />
+        <% } else if (file.type.startsWith("video/")) { %>
+        <!-- Render video -->
+        <video class="blog-video" controls>
+          <source src="<%= file.path %>" type="<%= file.type %>" />
+          Your browser does not support the video tag.
+        </video>
+        <% } %>
+      <% }) %>
+    </div>
+
+    <!-- Blog News -->
+    <p><%= blog.news %></p>
+  </div>
+  <% } else { %>
+  <p>Blog not found.</p>
+  <% } %>
+  <div>
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+  </div>
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerMenu = document.querySelector('.hamburger-menu');
+  const dropdownMenu = document.querySelector('.nav-links');
+
+  if (!hamburgerMenu || !dropdownMenu) {
+    console.warn("Dropdown elements not found on this page.");
+    return;
+  }
+
+  hamburgerMenu.addEventListener('click', (event) => {
+    event.stopPropagation();
+    dropdownMenu.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!dropdownMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+});
+
+document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
+<%- include("partials/footer") %>

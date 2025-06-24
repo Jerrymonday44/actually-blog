@@ -1,0 +1,70 @@
+<%- include("partials/header") %>
+
+<main class="review-main">
+  <h2>Review Posts</h2>
+  <% posts.forEach(post => { %>
+  <div class="review-post">
+    <% post.image.forEach(file => { %>
+      <% if (file.type.startsWith("image/")) { %>
+        <img src="<%= file.content %>" alt="Post Image" class="post-media" />
+      <% } else if (file.type.startsWith("video/")) { %>
+        <video class="post-media" autoplay muted loop playsinline id="video-<%= post.id %>">
+          <source src="<%= file.content %>" type="<%= file.type %>" />
+          Your browser does not support the video tag.
+        </video>
+        <button class="unmute-button" onclick="unmuteVideo('<%= post.id %>')">🔊 Unmute</button>
+      <% } %>
+    <% }) %>
+
+    <p><strong>Category:</strong> <%= post.category %></p>
+    <p><strong>Summary:</strong> <%= post.summary %></p>
+    <p><strong>Author:</strong> <%= post.author %></p>
+    <p><strong>Date:</strong> <%= post.date %></p>
+    <p><%= post.news %></p>
+
+    <div class="review-button-container">
+      <form action="/approve/<%= post.id %>" method="post">
+        <button class="review-button" type="submit">Approve</button>
+      </form>
+      <form action="/reject/<%= post.id %>" method="post">
+        <button class="review-button" type="submit">Reject</button>
+      </form>
+    </div>
+  </div>
+  <% }) %>
+</main>
+
+<script>
+  function unmuteVideo(id) {
+    const video = document.getElementById(`video-${id}`);
+    if (video) {
+      video.muted = false;
+      video.play();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const dropdownMenu = document.querySelector('.nav-links');
+
+    if (!hamburgerMenu || !dropdownMenu) {
+      console.warn("Dropdown elements not found on this page.");
+      return;
+    }
+
+    hamburgerMenu.addEventListener('click', (event) => {
+      event.stopPropagation();
+      dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!dropdownMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+  });
+</script>
+
+<%- include("partials/footer") %>

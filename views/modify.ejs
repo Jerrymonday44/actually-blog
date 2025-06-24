@@ -1,0 +1,65 @@
+<%- include("partials/header") %>
+    <main>
+        <form class="modify-form" action="/submitpost" method="post" enctype="multipart/form-data">
+            <h2 class="form-title">Add Blog Post</h2>
+            <div class="form-group">
+              <label for="image" class="file-label">Upload File</label>
+              <input class="file-input" type="file" name="files" accept="image/*,video/*" multiple/>
+              <p id="file">must not exceed 50mb</p>
+            </div>
+            <div class="form-group">
+              <label for="category-options">Category</label>
+              <select id="category-options" name="category">
+                <option value="sports">Sports</option>
+                <option value="politics">Politics</option>
+                <option value="show-biz">Show-biz</option>
+                <option value="tech">Tech</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="summary">Summary</label>
+              <textarea name="summary" class="large-textarea" rows="5" cols="40"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="news">News</label>
+              <textarea name="news" class="large-textarea" rows="5" cols="40"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="author">Author</label>
+              <input class="text-field" type="text" name="author">
+            </div>
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="text" name="date" placeholder="yyyy-mm-dd" />
+            </div>
+            <div class="form-group">
+                <button class="addpost-link" type="submit">Submit Post</button>
+            </div>
+          </form>
+    </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerMenu = document.querySelector('.hamburger-menu');
+  const dropdownMenu = document.querySelector('.nav-links');
+
+  if (!hamburgerMenu || !dropdownMenu) {
+    console.warn("Dropdown elements not found on this page.");
+    return;
+  }
+
+  hamburgerMenu.addEventListener('click', (event) => {
+    event.stopPropagation();
+    dropdownMenu.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!dropdownMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+});
+
+document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
+<%- include("partials/footer") %>

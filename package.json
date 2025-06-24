@@ -1,0 +1,28 @@
+{
+  "name": "actually-blog",
+  "version": "1.0.0",
+  "description": "blog",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "migrate": "sequelize-cli db:migrate"
+  },
+  "author": "jeremiah",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.9",
+    "pg": "^8.13.1",
+    "twilio": "^5.3.6"
+  }
+}

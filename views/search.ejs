@@ -1,0 +1,47 @@
+<%- include("partials/header") %>
+
+<main>
+  <% if (blogs.length) { %>
+    <h1>Search Results for "<%= search %>"</h1>
+    <div class="search-blog-list">
+      <% blogs.forEach((blog) => { %>
+        <div class="search-blog-item">
+          <% if (blog.image.length) { %>
+            <img src="<%= blog.image[0].path %>" alt="Blog Image" class="blog-image" />
+          <% } else { %>
+            <img src="/assets/images/default-placeholder.png" alt="Default Image" class="blog-image" />
+          <% } %>
+          <h2 class="blog-topic"><%= blog.topic %></h2>
+          <p class="blog-summary"><%= blog.summary %></p>
+          <p class="blog-date"><small>Published on: <%= blog.date %></small></p>
+          <div id="news-link">
+            <a class="read-more" href="/blogs/<%= blog.id %>">Read More</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <% const nextOffset = offset + limit; %>
+    <% if (blogs.length === limit) { %>
+      <a
+        href="/search?q=<%= search %>&offset=<%= nextOffset %>&limit=<%= limit %>"
+        class="load-more"
+      >
+        Load More
+      </a>
+    <% } %>
+    <% if (offset > 0) { %>
+      <% const prevOffset = Math.max(0, offset - limit); %>
+      <a
+        href="/search?q=<%= search %>&offset=<%= prevOffset %>&limit=<%= limit %>"
+        class="load-more"
+      >
+        Previous
+      </a>
+    <% } %>
+  <% } else { %>
+    <h1>No results found for "<%= search %>"</h1>
+  <% } %>
+</main>
+
+<%- include("partials/footer") %>

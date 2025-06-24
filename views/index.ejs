@@ -1,0 +1,115 @@
+<%- include("partials/header") %>
+
+<main class="index-main">
+  <div class="left-advert">
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+  </div>
+
+  <div class="news-container">
+    <section class="type">
+      <!-- first section in main -->
+      <h2>Explore the Latest Updates Here</h2>
+      <div class="first-main-container">
+        <div>
+          <a href="/sports" id="section-1-link">
+            <h3>Stay Informed on Sports and Entertainment</h3>
+            <img class="sports-and-entertainment" src="../assets/images/sportscover.jpeg" alt="sports-and-entertainment" />
+          </a>
+        </div>
+        <div>
+          <a href="/politics" id="section-1-link">
+            <h3>Stay Updated on Political matters</h3>
+            <img class="politics" src="../assets/images/politicscoverimg.jpeg" alt="politics" />
+          </a>
+        </div>
+        <div>
+          <a href="/show-biz" id="section-1-link">
+            <h3>Get the Hottest Celebrity Happenings</h3>
+            <img class="celebrities" src="../assets/images/celebcover.png" alt="celebrities" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="headlline">
+      <!-- second section in main -->
+      <h2>Headlines</h2>
+      <div class="second-main-container">
+        <% if (blogs && blogs.length) { %>
+          <% blogs.forEach(blog => { %>
+            <div>
+              <% if (blog.image && blog.image.length) { %> 
+                <% const firstImage = blog.image.find(file => file?.type?.startsWith("image/")); %>
+                <% const firstVideo = blog.image.find(file => file?.type?.startsWith("video/")); %>
+
+                <% if (firstImage) { %>
+                  <!-- Show image -->
+                  <img class="blog-image" src="<%= firstImage.path %>" alt="blog-image" loading="lazy" />
+                <% } else if (firstVideo) { %>
+                  <!-- Auto-playing muted video preview -->
+                  <video class="blog-video-preview" autoplay muted loop playsinline>
+                    <source src="<%= firstVideo.path %>" type="<%= firstVideo.type %>">
+                    Your browser does not support the video tag.
+                  </video>
+                <% } else { %>
+                  <div id="media" class="placeholder">
+                    <p>No media available</p>
+                  </div>
+                <% } %>
+              <% } else { %>
+                <div id="media" class="placeholder">
+                  <p>No media available</p>
+                </div>
+              <% } %>
+
+              <h3><%= blog.summary %></h3>
+              <strong id="author">Author: <%= blog.author %></strong>
+              <p class="blog-date"><small>Published on: <%= blog.date %></small></p>
+              <div id="news-link">
+                <a class="read-more" href="/blogs/<%= blog.id %>">Read More</a>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <p class="placeholder">No blogs available at the moment.</p>
+        <% } %>
+      </div>
+
+      <% const nextOffset = offset + limit; %>
+      <a href="?offset=<%= nextOffset %>&limit=<%= limit %>" class="load-more">Load More</a>
+    </section>
+  </div>
+
+  <div class="right-advert">
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const dropdownMenu = document.querySelector('.nav-links');
+
+    if (!hamburgerMenu || !dropdownMenu) {
+      console.warn("Dropdown elements not found on this page.");
+      return;
+    }
+
+    hamburgerMenu.addEventListener('click', (event) => {
+      event.stopPropagation();
+      dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!dropdownMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+  });
+</script>
+
+<%- include("partials/footer") %>
