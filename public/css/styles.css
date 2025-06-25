@@ -528,7 +528,7 @@ h5 {
 }
 
 .modify-form .addpost-link:hover {
-  background: bisque;
+  background: whitesmoke;
 }
 
 /* File label */
@@ -545,7 +545,7 @@ h5 {
 }
 
 .modify-form .file-label:hover {
-  background: bisque;
+  background: whitesmoke;
 }
 
 /* Placeholder for date field */
@@ -662,7 +662,7 @@ h5 {
 }
 
 .contact-us-form button:hover {
-  background-color: bisque;
+  background-color: whitesmoke;
 }
 
 .contact-us-form button:active {
@@ -730,7 +730,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 60px; /* Below the header */
     right: 10px;
     width: auto; /* Automatically adjust to fit content */
-    background: bisque; /* Darker background for dropdown */
+    background: whitesmoke; /* Darker background for dropdown */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
     padding: 0.5rem 0; /* Space around links */
@@ -788,6 +788,19 @@ h1, h2, h3, h4, h5, h6 {
 
   .second-main-container > div {
     width: 100%;
+  }
+
+  .review-post {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  } 
+
+  .review-post img,
+  .review-post video {
+  width: 100%;
+  height: auto;
   }
 
   footer {
