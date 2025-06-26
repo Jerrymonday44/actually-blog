@@ -274,8 +274,7 @@ app.post(
       [category, summary, news, JSON.stringify(serializedFiles), date, author]
     );
 
-    // res.status(200).json({ message: "Your post has been submitted and is awaiting approval.", redirectUrl: "/create-post" });
-    alert("Your post has been submitted and is awaiting approval.")
+    res.status(200).json({ message: "Your post has been submitted and is awaiting approval.", redirectUrl: "/create-post" });
     res.redirect("/create-post")
   })
 );
