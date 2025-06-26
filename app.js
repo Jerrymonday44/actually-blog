@@ -73,7 +73,7 @@ const upload = multer({
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error("Invalid file type"));
+      cb(new Error("Only image and video formats are allowed"));
     }
   },
 });
@@ -274,7 +274,9 @@ app.post(
       [category, summary, news, JSON.stringify(serializedFiles), date, author]
     );
 
-    res.status(200).json({ message: "Your post has been submitted and is awaiting approval.", redirectUrl: "/create-post" });
+    // res.status(200).json({ message: "Your post has been submitted and is awaiting approval.", redirectUrl: "/create-post" });
+    alert("Your post has been submitted and is awaiting approval.")
+    res.redirect("/create-post")
   })
 );
 
